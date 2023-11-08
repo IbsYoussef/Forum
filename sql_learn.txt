@@ -1,0 +1,48 @@
+CREATE TABLE USERS (username TEXT NOT NULL PRIMARY KEY, 
+password NOT NULL, email NOT NULL); 
+
+Create is used to make a data structure, we specify what data and the names
+______________________________________________________________________________________________________________________
+
+INSERT INTO USERS (username, password, email)
+VALUES("james", "jamesmypassword", "jamesMicheal@gmail.com"); 
+
+This inserts values into the table fields of the table
+Values is what we are inserting 
+______________________________________________________________________________________________________________________
+
+SELECT * FROM USERS;
+
+SELECT email FROM USERS
+WHERE username = "joe";
+
+SELECT password FROM USERS
+WHERE username IN ("joe", "mike");
+
+SELECT reads entire table for a particular result that we specify
+Where is used similiarly to an if statement to state the value if a certain field equals to the desired result
+
+______________________________________________________________________________________________________________________
+
+SELECT password FROM USERS
+WHERE username IN ("joe", "mike");
+IN higlights multiple names to look for, similiar to ||. 
+
+______________________________________________________________________________________________________________________
+
+BETWEEN looks for values within a given range
+LIKE looks for values based on a predefined filter.
+
+______________________________________________________________________________________________________________________
+
+UPDATE USERS SET email = "newEmail@gmail.com"
+WHERE username = "mike";
+
+Updates field value with new value, can multiple field values seperated by ,
+
+______________________________________________________________________________________________________________________
+
+DELETE FROM USERS
+WHERE username = "joe";
+
+Delets a field info
