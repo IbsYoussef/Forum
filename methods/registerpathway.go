@@ -12,12 +12,14 @@ import (
 var tpl *template.Template
 var db *sql.DB
 
+var (
+	INSERT string = "INSERT INTO USERS (username, password, email) VALUES (?,?,?)"
+	FIND   string = "SELECT COUNT(*) FROM users WHERE email = ?"
+)
+
 func init() {
 	tpl = template.Must(tpl.ParseGlob("templates/*.html"))
 }
-
-const INSERT = "INSERT INTO USERS (username, password, email) VALUES (?,?,?)"
-const FIND = "SELECT COUNT(*) FROM users WHERE email = ?"
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
