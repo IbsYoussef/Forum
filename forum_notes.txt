@@ -5,7 +5,7 @@ Register Pathway:
 Authentication next tasks:
 Check if credentials already exist:
 1: Check if email already exists, if it does must ask user to register a different email,
-return error
+return error //Completed
 
 2: Bcrypt Password // Completed
 

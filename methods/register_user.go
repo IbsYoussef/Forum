@@ -41,12 +41,14 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//Check Form Parsing error
 	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, "Error parsing form data", http.StatusInternalServerError)
 		return
 	}
 
+	//Parse user registration details
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 	email := r.FormValue("email")
@@ -58,24 +60,27 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	var count int
-	err = db.QueryRow(FIND, email).Scan(&count)
+	// Check if the email already exists
+	exists, err := EmailExists(db, email)
 	if err != nil {
 		http.Error(w, "Error checking email existence in the database", http.StatusInternalServerError)
 		return
 	}
 
-	if count > 0 {
+	// If email already exists, return an error
+	if exists {
 		http.Error(w, "Email is already taken", http.StatusBadRequest)
 		return
-	} else {
-		password = HashPassword(password)
+	}
 
-		_, err = db.Exec(INSERT, username, password, email)
-		if err != nil {
-			http.Error(w, "Error inserting data into the database", http.StatusInternalServerError)
-			return
-		}
+	//Bcrypt Password
+	password = HashPassword(password)
+
+	//Insert Values to Data
+	_, err = db.Exec(INSERT, username, password, email)
+	if err != nil {
+		http.Error(w, "Error inserting data into the database", http.StatusInternalServerError)
+		return
 	}
 
 	tpl.ExecuteTemplate(w, "message.html", nil)
@@ -87,4 +92,13 @@ func HashPassword(password string) (hashedPassword string) {
 		fmt.Printf("Error Hashing Password: Error Code %v", err)
 	}
 	return string(Hash)
+}
+
+func EmailExists(db *sql.DB, email string) (bool, error) {
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+	return count > 0, nil
 }
