@@ -69,11 +69,7 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Email is already taken", http.StatusBadRequest)
 		return
 	} else {
-		hashedPassword, Herr := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-		if Herr != nil {
-			fmt.Printf("Error Hashing Password: Error Code %v", Herr)
-		}
-		password = string(hashedPassword)
+		password = HashPassword(password)
 
 		_, err = db.Exec(INSERT, username, password, email)
 		if err != nil {
@@ -83,4 +79,12 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tpl.ExecuteTemplate(w, "message.html", nil)
+}
+
+func HashPassword(password string) (hashedPassword string) {
+	Hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		fmt.Printf("Error Hashing Password: Error Code %v", err)
+	}
+	return string(Hash)
 }
