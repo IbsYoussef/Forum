@@ -1,0 +1,19 @@
+Next Steps:
+
+Authentication next tasks:
+
+Check if credentials already exist:
+1: Check if email already exists, if it does must ask user to register a different email,
+return error
+
+2: Bcrypt Password
+
+Cookies Session:
+Create a login Session with the use of Cookies, Only one Session can be active/open 
+UUID implementation
+
+After Authentication/Session is established:
+Must be able to check if email and password provided are correct
+
+
+
