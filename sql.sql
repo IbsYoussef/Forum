@@ -25,4 +25,4 @@
 
 -- DELETE FROM USERS WHERE username = "james";
 
-SELECT * FROM USERS
+-- SELECT * FROM USERS
