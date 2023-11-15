@@ -15,14 +15,6 @@ var (
 	FIND   string = "SELECT COUNT(*) FROM users WHERE email = ?"
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Error(w, "Error 404 Page not found", 404)
-	} else {
-		tpl.ExecuteTemplate(w, "index.html", nil)
-	}
-}
-
 func RegisterPageHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/register" {
 		http.Error(w, "Error 404 Page not found", 404)
@@ -49,6 +41,7 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 	email := r.FormValue("email")
 
+	//Open Database
 	db, err := sql.Open("sqlite3", "userdb.db")
 	if err != nil {
 		http.Error(w, "Error opening the database", http.StatusInternalServerError)
