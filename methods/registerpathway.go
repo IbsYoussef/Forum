@@ -3,23 +3,17 @@ package methods
 import (
 	"database/sql"
 	"fmt"
-	"html/template"
 	"net/http"
 
 	"golang.org/x/crypto/bcrypt"
 )
 
-var tpl *template.Template
 var db *sql.DB
 
 var (
 	INSERT string = "INSERT INTO USERS (username, password, email) VALUES (?,?,?)"
 	FIND   string = "SELECT COUNT(*) FROM users WHERE email = ?"
 )
-
-func init() {
-	tpl = template.Must(tpl.ParseGlob("templates/*.html"))
-}
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -89,6 +83,11 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func HashPassword(password string) (hashedPassword string) {
+	//Bcrypt Password
+
+	//Check Error
+
+	//Return Hashed Password
 	Hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Printf("Error Hashing Password: Error Code %v", err)
@@ -97,10 +96,15 @@ func HashPassword(password string) (hashedPassword string) {
 }
 
 func EmailExists(db *sql.DB, email string) (bool, error) {
+	// Check if user email signed up already exists
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
 	if err != nil {
 		return false, err
 	}
 	return count > 0, nil
+}
+
+func LoggedInHandler(w http.ResponseWriter, r *http.Request) {
+	
 }

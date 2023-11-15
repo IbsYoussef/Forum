@@ -1,0 +1,10 @@
+Login Pathway Plan:
+Get User Info
+
+Check credentials against database
+
+If successful Load their account and profile
+
+If not ask them to Re-enter Correct Credentials 
+
+Load Main Page

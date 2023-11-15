@@ -11,8 +11,15 @@ import (
 
 func main() {
 	http.HandleFunc("/", methods.IndexHandler)
+
+	//Register User Pathway
 	http.HandleFunc("/register", methods.RegisterPageHandler)
 	http.HandleFunc("/message", methods.RegisterUserInfo)
+
+	//Log In User Pathway
+	// http.HandleFunc("/logIn", methods.LogInHandler)
+
+	http.HandleFunc("/loggedIn", methods.LoggedInHandler)
 
 	assets := http.FileServer(http.Dir("assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", assets))
