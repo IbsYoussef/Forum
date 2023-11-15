@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elaborate Forum</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      header {
+        text-align: center;
+        padding: 10px;
+        background-color: #3498db;
+        color: #fff;
+      }
+
+      section {
+        margin-top: 20px;
+      }
+
+      article {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      article h2 {
+        color: #3498db;
+      }
+
+      article p {
+        margin-bottom: 10px;
+      }
+
+      form {
+        margin-top: 20px;
+        background-color: #f2f2f2;
+        padding: 15px;
+        border-radius: 5px;
+      }
+
+      form label,
+      form textarea,
+      form button {
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>SeeIT @01Peers</h1>
+    </header>
+
+    <section>
+      <article>
+        <h2>Topic Title 1</h2>
+        <p>Posted by: John Doe</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui
+          mauris.
+        </p>
+        <button onclick="toggleComments('commentSection1')">
+          Show/Hide Comments
+        </button>
+        <section id="commentSection1" style="display: none">
+          <h3>Comments</h3>
+          <p>Comment 1 by Alice</p>
+          <p>Comment 2 by Bob</p>
+        </section>
+      </article>
+
+      <article>
+        <h2>Topic Title 2</h2>
+        <p>Posted by: Jane Smith</p>
+        <p>
+          Another interesting topic. Duis aute irure dolor in reprehenderit in
+          voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </p>
+        <button onclick="toggleComments('commentSection2')">
+          Show/Hide Comments
+        </button>
+        <section id="commentSection2" style="display: none">
+          <h3>Comments</h3>
+          <p>Comment 1 by Charlie</p>
+          <p>Comment 2 by David</p>
+        </section>
+      </article>
+
+      <!-- More articles can be added for additional topics -->
+
+      <form>
+        <h2>Create a New Topic</h2>
+        <label for="topicTitle">Title:</label>
+        <input type="text" id="topicTitle" name="topicTitle" required />
+
+        <label for="postContent">Post:</label>
+        <textarea id="postContent" name="postContent" required></textarea>
+
+        <button type="submit">Post</button>
+      </form>
+    </section>
+
+    <script>
+      function toggleComments(sectionId) {
+        var section = document.getElementById(sectionId);
+        section.style.display =
+          section.style.display === "none" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>
