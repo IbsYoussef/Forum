@@ -106,5 +106,9 @@ func EmailExists(db *sql.DB, email string) (bool, error) {
 }
 
 func LoggedInHandler(w http.ResponseWriter, r *http.Request) {
-	
+	if r.URL.Path != "/loggedIn" {
+		http.Error(w, "Error 404 Page not found", 404)
+	} else {
+		tpl.ExecuteTemplate(w, "loggedin.html", nil)
+	}
 }

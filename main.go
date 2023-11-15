@@ -17,8 +17,9 @@ func main() {
 	http.HandleFunc("/message", methods.RegisterUserInfo)
 
 	//Log In User Pathway
-	// http.HandleFunc("/logIn", methods.LogInHandler)
+	http.HandleFunc("/logIn", methods.LogInHandler)
 
+	//User Logged In. End of Either Pathways
 	http.HandleFunc("/loggedIn", methods.LoggedInHandler)
 
 	assets := http.FileServer(http.Dir("assets"))
