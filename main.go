@@ -13,16 +13,6 @@ func main() {
 	//Index Page
 	http.HandleFunc("/", methods.IndexHandler)
 
-	//Register User Pathway
-	http.HandleFunc("/register", methods.RegisterPageHandler)
-	http.HandleFunc("/message", methods.RegisterUserInfo)
-
-	//Log In User Pathway
-	http.HandleFunc("/logIn", methods.LogInHandler)
-
-	//User Logged In. End of Either Pathways
-	http.HandleFunc("/loggedIn", methods.UserLoggedInHandler)
-
 	assets := http.FileServer(http.Dir("assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", assets))
 

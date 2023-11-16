@@ -7,16 +7,11 @@ import (
 
 var db *sql.DB
 
-var (
-	INSERT string = "INSERT INTO USERS (username, password, email) VALUES (?,?,?)"
-	FIND   string = "SELECT COUNT(*) FROM users WHERE email = ?"
-)
-
-func RegisterPageHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/register" {
+func SignUpPageHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/sign_up" {
 		http.Error(w, "Error 404 Page not found", 404)
 	} else {
-		tpl.ExecuteTemplate(w, "register.html", nil)
+		tpl.ExecuteTemplate(w, "sign_up.html", nil)
 	}
 }
 
