@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"forum/packages/methods"
+	methods "forum/packages/methods"
 	"log"
 	"net/http"
 
@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	//Index Page
 	http.HandleFunc("/", methods.IndexHandler)
 
 	//Register User Pathway
@@ -20,7 +21,7 @@ func main() {
 	http.HandleFunc("/logIn", methods.LogInHandler)
 
 	//User Logged In. End of Either Pathways
-	http.HandleFunc("/loggedIn", methods.LoggedInHandler)
+	http.HandleFunc("/loggedIn", methods.UserLoggedInHandler)
 
 	assets := http.FileServer(http.Dir("assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", assets))
