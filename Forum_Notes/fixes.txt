@@ -1,1 +1,1 @@
-Error of invalid credentials on login page does not work
+Must rework function handlers
