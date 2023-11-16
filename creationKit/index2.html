@@ -20,6 +20,12 @@
       section {
         margin-top: 20px;
       }
+      .primary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
       .post {
         border: 1px solid #ddd;
@@ -72,67 +78,69 @@
   </head>
 
   <body>
-    <header>
-      <h1>SEEit @01Students</h1>
-    </header>
+    <div class="primary">
+      <header>
+        <h1>SEEit @01Students</h1>
+      </header>
 
-    <section>
-      <div class="post">
-        <h2>Post Title 1</h2>
-        <p>Posted by: u/JohnDoe</p>
-        <img src="example-image.jpg" alt="Example Image" />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui
-          mauris.
-        </p>
-        <div class="comments">
-          <div class="comment">
-            <p>u/Alice: Comment 1</p>
-          </div>
-          <div class="comment">
-            <p>u/Bob: Comment 2</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="post">
-        <h2>Post Title 2</h2>
-        <p>Posted by: u/JaneSmith</p>
-        <img src="another-image.jpg" alt="Another Image" />
-        <p>
-          Another interesting post. Duis aute irure dolor in reprehenderit in
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        </p>
-        <div class="comments">
-          <div class="comment">
-            <p>u/Charlie: Comment 1</p>
-          </div>
-          <div class="comment">
-            <p>u/David: Comment 2</p>
+      <section>
+        <div class="post">
+          <h2>Post Title 1</h2>
+          <p>Posted by: u/JohnDoe</p>
+          <img src="example-image.jpg" alt="Example Image" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
+            dui mauris.
+          </p>
+          <div class="comments">
+            <div class="comment">
+              <p>u/Alice: Comment 1</p>
+            </div>
+            <div class="comment">
+              <p>u/Bob: Comment 2</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- More posts can be added for additional topics -->
+        <div class="post">
+          <h2>Post Title 2</h2>
+          <p>Posted by: u/JaneSmith</p>
+          <img src="another-image.jpg" alt="Another Image" />
+          <p>
+            Another interesting post. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          </p>
+          <div class="comments">
+            <div class="comment">
+              <p>u/Charlie: Comment 1</p>
+            </div>
+            <div class="comment">
+              <p>u/David: Comment 2</p>
+            </div>
+          </div>
+        </div>
 
-      <form>
-        <h2>Create a New Post</h2>
-        <label for="postTitle">Title:</label>
-        <input type="text" id="postTitle" name="postTitle" required />
+        <!-- More posts can be added for additional topics -->
 
-        <label for="postContent">Post:</label>
-        <textarea id="postContent" name="postContent" required></textarea>
+        <form>
+          <h2>Create a New Post</h2>
+          <label for="postTitle">Title:</label>
+          <input type="text" id="postTitle" name="postTitle" required />
 
-        <label for="imageUpload">Upload Image:</label>
-        <input
-          type="file"
-          id="imageUpload"
-          name="imageUpload"
-          accept="image/*"
-        />
+          <label for="postContent">Post:</label>
+          <textarea id="postContent" name="postContent" required></textarea>
 
-        <button type="submit">Post</button>
-      </form>
-    </section>
+          <label for="imageUpload">Upload Image:</label>
+          <input
+            type="file"
+            id="imageUpload"
+            name="imageUpload"
+            accept="image/*"
+          />
+
+          <button type="submit">Post</button>
+        </form>
+      </section>
+    </div>
   </body>
 </html>
