@@ -1,6 +1,6 @@
 Confident that I have learned:
 Checking info against Database
-Brcrypting
+Bcrypting
 
 Need to learn next:
 Creating and implementing Cookie sessions
