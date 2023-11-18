@@ -1,0 +1,29 @@
+Confident that I have learned:
+Checking info against Database
+Brcrypting
+
+Need to learn next:
+Creating and implementing Cookie sessions
+UUID implementation
+
+Need to implement next:
+Unique user IDs,
+Table for Comments and Posts
+Displaying posts from user on pages
+Implementing like/dislike and comment feature
+Implementing filter feature to show certains posts
+
+Next Steps:
+
+1: Create login/sign_up webpage
+
+2: Implement following User Authentication
+- When Users sign up there credentials must be registered in database
+- Password Must be Bcrypted
+- If new user signs up with an email that exists already, must display message asking to choose a different one
+
+- When users login, Credentials must be checked. 
+- If incorrect Email or Password must display invalid error message
+
+
+
