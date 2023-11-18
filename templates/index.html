@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/index_styles.css">
+    <link rel="stylesheet" type="text/css" href="/assets/index_styles.css">
     <title>Document</title>
 </head>
 <body>
 
     <h1 style="text-align: center;">FORUM:</h1>
 
-    <div class="test" style="text-align: center;">
+    <div class="log_sign" style="text-align: center;">
         <a href=""><input type="button" value="Login"></a>
         <a href=""><input type="button" value="Register"></a>
     </div>
@@ -19,6 +19,21 @@
     <br>
 
     <h1 style="text-align: center;">POSTS:</h1>
+
+    <div class="filters">
+    <label for="filter">Filter</label>
+    <select name="options" id="filter">
+        <option value="Posted">Created Posts</option>
+        <option value="Commented">Liked Posts</option>
+    </select>
+
+    <label for="Categories">Categories</label>
+    <select name="Categories" id="Categories">
+        <option value="food">Food</option>
+        <option value="sports">Sports</option>
+        <option value="tech">Tech</option>
+    </select>
+    </div>
     
     
 </body>

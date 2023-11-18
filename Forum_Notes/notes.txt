@@ -9,7 +9,7 @@ UUID implementation
 Need to implement next:
 Unique user IDs,
 Table for Comments and Posts
-Displaying posts from user on pages
+Displaying posts from user on pages // Idea of steps, gather data input, store in db, execute into webpage
 Implementing like/dislike and comment feature
 Implementing filter feature to show certains posts
 

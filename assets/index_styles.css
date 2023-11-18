@@ -4,6 +4,10 @@
     display: flexbox;
 }
 
-.test{
+.log_sign{
+    text-align: center;
+}
+
+.filters{
     text-align: center;
 }
