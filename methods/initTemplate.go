@@ -2,8 +2,8 @@ package methods
 
 import "html/template"
 
-var tpl *template.Template
+var Tpl *template.Template
 
-func init() {
-	tpl = template.Must(tpl.ParseGlob("templates/*.html"))
+func Init() {
+	Tpl = template.Must(Tpl.ParseGlob("templates/*.html"))
 }

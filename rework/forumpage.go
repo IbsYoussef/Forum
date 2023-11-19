@@ -1,7 +1,8 @@
-package methods
+package rework
 
 import (
 	"database/sql"
+	"forum/packages/methods"
 	"net/http"
 )
 
@@ -9,7 +10,7 @@ func ForumPageHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/forum_page" {
 		http.Error(w, "Error 404 Page not found", 404)
 	} else {
-		tpl.ExecuteTemplate(w, "loggedIn.html", nil)
+		methods.Tpl.ExecuteTemplate(w, "loggedIn.html", nil)
 	}
 
 	err := r.ParseForm()
@@ -26,14 +27,14 @@ func ForumPageHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	check, err := Checkcredentials(db, email, password)
+	check, err := methods.Checkcredentials(db, email, password)
 	if err != nil {
 		http.Error(w, "Error checking email and password existence in the database", http.StatusInternalServerError)
 		return
 	}
 
 	if check {
-		tpl.ExecuteTemplate(w, "forum_page.html", nil)
+		methods.Tpl.ExecuteTemplate(w, "forum_page.html", nil)
 	} else {
 		http.Error(w, "Invalid Email or Password", http.StatusInternalServerError)
 	}

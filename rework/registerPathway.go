@@ -1,17 +1,16 @@
-package methods
+package rework
 
 import (
 	"database/sql"
+	"forum/packages/methods"
 	"net/http"
 )
-
-var db *sql.DB
 
 func SignUpPageHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/sign_up" {
 		http.Error(w, "Error 404 Page not found", 404)
 	} else {
-		tpl.ExecuteTemplate(w, "sign_up.html", nil)
+		methods.Tpl.ExecuteTemplate(w, "sign_up.html", nil)
 	}
 }
 
@@ -42,7 +41,7 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// Check if the email already exists
-	exists, err := EmailExists(db, email)
+	exists, err := methods.EmailExists(db, email)
 	if err != nil {
 		http.Error(w, "Error checking email existence in the database", http.StatusInternalServerError)
 		return
@@ -55,14 +54,14 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Bcrypt Password
-	password = HashPassword(password)
+	password = methods.HashPassword(password)
 
 	//Insert Values to Data
-	_, err = db.Exec(INSERT, username, password, email)
+	_, err = db.Exec(methods.INSERT, username, password, email)
 	if err != nil {
 		http.Error(w, "Error inserting data into the database", http.StatusInternalServerError)
 		return
 	}
 
-	tpl.ExecuteTemplate(w, "message.html", nil)
+	methods.Tpl.ExecuteTemplate(w, "message.html", nil)
 }
