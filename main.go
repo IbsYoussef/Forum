@@ -13,8 +13,7 @@ func main() {
 	//Index Page
 	http.HandleFunc("/", methods.IndexHandler)
 
-	assets := http.FileServer(http.Dir("assets"))
-	http.Handle("/assets/", http.StripPrefix("/assets/", assets))
+	methods.ServeStatic()
 
 	fmt.Printf("Listening... on port 👉 http://localhost:8080/ \n")
 	fmt.Printf("Use 👉 Control+C to stop server \n")
