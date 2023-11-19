@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign Up</title>
     <link rel="stylesheet" href="/assets/login_register_styles.css">
-    <title>Log In/Register Page</title>
 </head>
 <body>
-    <div class="form-container">
 
-        <p class="title">Welcome</p>
-        <form action="">
-            <input type="text" class="input" placeholder="Email">
-            <input type="password" class="input" placeholder="Password">
+    <form>
+        <input type="radio" id="login" name="formType" checked>
+        <label for="login">Login</label>
 
-            <p class="forgot-password">
-                <a href="#" class="forgot-password-label">Forgot Password</a>
-            </p>
+        <input type="radio" id="signup" name="formType">
+        <label for="signup">Sign Up</label>
 
-            <button class="btn login-btn">Log in</button>
-        </form>
-        <p class="signup-link">
-          Don't have an account? <a href="#" class="sing-up label">Sing Up</a>  
-        </p>
+        <div id="loginForm">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-        
-    </div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-    
+            <button type="submit">Login</button>
+        </div>
+
+        <div id="signupForm">
+            <h2>Sign Up</h2>
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" name="newUsername" required>
+
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+
 </body>
 </html>
