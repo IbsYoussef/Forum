@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/assets/index_styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+    <style>
+      html {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(#141e30, #243b55);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">FORUM:</h1>
 
-    <h1 style="text-align: center;">FORUM:</h1>
-
-    <div class="buttons" style="text-align: center;">
-        <a href="/login"><input type="button" value="Login"></a>
-        <a href="/register"><input type="button" value="Register"></a>
+    <div class="buttons" style="text-align: center">
+      <a href="/login"><input type="button" value="Login" /></a>
+      <a href="/register"><input type="button" value="Register" /></a>
     </div>
-   
-    <br>
-    <br>
 
-    <h1 style="text-align: center;">POSTS:</h1>
+    <br />
+    <br />
+
+    <h1 style="text-align: center">POSTS:</h1>
 
     <div class="filters">
-    <label for="filter">Filter</label>
-    <select name="options" id="filter">
+      <label for="filter">Filter</label>
+      <select name="options" id="filter">
         <option value="posted">Created Posts</option>
         <option value="commented">Liked Posts</option>
-    </select>
+      </select>
 
-    <label for="Categories">Categories</label>
-    <select name="Categories" id="Categories">
+      <label for="Categories">Categories</label>
+      <select name="Categories" id="Categories">
         <option value="food">Food</option>
         <option value="sports">Sports</option>
         <option value="tech">Tech</option>
-    </select>
+      </select>
     </div>
-    
-    
-</body>
+  </body>
 </html>
