@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	methods.Init()
+	methods.InitGlobalTemplate()
 
 	//Index Page
 	http.HandleFunc("/", methods.IndexHandler)
@@ -18,6 +18,9 @@ func main() {
 	//Login and Register Page
 	http.HandleFunc("/login", methods.LoginPageRegHandler)
 	http.HandleFunc("/register", methods.RegisterPageHandler)
+
+	//Forum Page Handler
+	http.HandleFunc("/mainpage", methods.ForumPageHandler)
 
 	methods.ServeStatic()
 
