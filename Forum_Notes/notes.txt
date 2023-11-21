@@ -1,11 +1,3 @@
-Confident that I have learned:
-Checking info against Database
-Bcrypting
-
-Need to learn next:
-Creating and implementing Cookie sessions
-UUID implementation
-
 Need to implement next:
 Unique user IDs,
 Table for Comments and Posts
@@ -14,8 +6,6 @@ Implementing like/dislike and comment feature
 Implementing filter feature to show certains posts
 
 Next Steps:
-
-1: Create login/sign_up webpage
 
 2: Implement following User Authentication
 - When Users sign up there credentials must be registered in database
