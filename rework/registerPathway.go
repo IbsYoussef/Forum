@@ -6,14 +6,6 @@ import (
 	"net/http"
 )
 
-func SignUpPageHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/sign_up" {
-		http.Error(w, "Error 404 Page not found", 404)
-	} else {
-		methods.Tpl.ExecuteTemplate(w, "sign_up.html", nil)
-	}
-}
-
 func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.Error(w, "Error Page 404 not found", 404)
