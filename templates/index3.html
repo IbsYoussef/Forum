@@ -1,33 +1,21 @@
-<!-- color palette -->
-<!-- #164863 #1D6D8A #427D9D #9BBEC8 #DDF2FD  -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum</title>
+    <title>Reddit-Like Forum with Image Upload</title>
     <style>
-      html {
-        height: 100%;
-      }
-
       body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background-color: #243b55;
         font-family: Arial, sans-serif;
         margin: 20px;
+        background-color: #e5f9db;
       }
 
       header {
-        border: 1px solid #243b55;
-        border-radius: 5px;
         text-align: center;
         padding: 10px;
-        background-color: #427d9d;
-        color: #ddf2fd;
+        background-color: #a0d8b3;
+        color: #83764f;
       }
 
       section {
@@ -35,16 +23,16 @@
       }
 
       .post {
-        border: 1px solid #243b55;
+        border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
         margin-bottom: 15px;
-        background-color: #427d9d;
-        color: #ddf2fd;
+        background-color: #a2a378;
+        color: #e5f9db;
       }
 
       .post h2 {
-        color: #ddf2fd;
+        color: #e5f9db;
       }
 
       .post p {
@@ -52,7 +40,7 @@
       }
 
       .post img {
-        max-width: 80%;
+        max-width: 100%;
         height: auto;
         margin-bottom: 10px;
       }
@@ -63,27 +51,19 @@
       }
 
       .comment {
-        border: 1px solid #164863;
+        border: 1px solid #ddd;
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 10px;
-        background-color: #164863;
-        color: #9bbec8;
+        background-color: #a2a378;
+        color: #e5f9db;
       }
 
       form {
         margin-top: 20px;
-        background-color: #9bbec8;
+        background-color: #f2f2f2;
         padding: 15px;
         border-radius: 5px;
-        align-items: center;
-        /* move to the center */
-        position: relative;
-
-        /* Center horizontally */
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%; /* Adjust the width as needed */
       }
 
       form label,
@@ -95,56 +75,19 @@
       }
 
       form button {
-        background-color: #243b55;
-        color: #9bbec8;
+        background-color: #a0d8b3;
+        color: #83764f;
         cursor: pointer;
-        border-radius: 5px;
       }
     </style>
   </head>
 
   <body>
     <header>
-      <h1 style="text-align: center">FORUM</h1>
-      <div class="buttons" style="text-align: center">
-        <a href="/login"><input type="button" value="Login" /></a>
-        <a href="/register"><input type="button" value="Register" /></a>
-      </div>
-      <div class="filters">
-        <label for="filter">Filter</label>
-        <select name="options" id="filter">
-          <option value="posted">Created Posts</option>
-          <option value="commented">Liked Posts</option>
-        </select>
-        <label for="Categories">Categories</label>
-        <select name="Categories" id="Categories">
-          <option value="food">Food</option>
-          <option value="sports">Sports</option>
-          <option value="tech">Tech</option>
-        </select>
-      </div>
+      <h1>Reddit-Like Forum with Image Upload</h1>
     </header>
 
     <section>
-      <form>
-        <h2>Create a New Post</h2>
-        <label for="postTitle">Title:</label>
-        <input type="text" id="postTitle" name="postTitle" required />
-
-        <label for="postContent">Post:</label>
-        <textarea id="postContent" name="postContent" required></textarea>
-
-        <label for="imageUpload">Upload Image:</label>
-        <input
-          type="file"
-          id="imageUpload"
-          name="imageUpload"
-          accept="image/*"
-        />
-
-        <button type="submit">Post</button>
-      </form>
-      <br />
       <div class="post">
         <h2>Post Title 1</h2>
         <p>Posted by: u/JohnDoe</p>
@@ -202,8 +145,5 @@
         <button type="submit">Post</button>
       </form>
     </section>
-    <footer>
-      <p style="text-align: center">Created by: Group 1</p>
-    </footer>
   </body>
 </html>
