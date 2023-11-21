@@ -10,8 +10,14 @@ import (
 )
 
 func main() {
+	methods.Init()
+
 	//Index Page
 	http.HandleFunc("/", methods.IndexHandler)
+
+	//Login and Register Page
+	http.HandleFunc("/login", methods.LoginPageRegHandler)
+	http.HandleFunc("/register", methods.RegisterPageHandler)
 
 	methods.ServeStatic()
 
