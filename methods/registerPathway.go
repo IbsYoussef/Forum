@@ -1,8 +1,7 @@
-package rework
+package methods
 
 import (
 	"database/sql"
-	"forum/packages/methods"
 	"net/http"
 )
 
@@ -25,7 +24,7 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 
 	//Open Database
-	db, err := sql.Open("sqlite3", "userdb.db")
+	db, err := sql.Open("sqlite3", "database/userdb.db")
 	if err != nil {
 		http.Error(w, "Error opening the database", http.StatusInternalServerError)
 		return
@@ -33,7 +32,7 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// Check if the email already exists
-	exists, err := methods.EmailExists(db, email)
+	exists, err := EmailExists(db, email)
 	if err != nil {
 		http.Error(w, "Error checking email existence in the database", http.StatusInternalServerError)
 		return
@@ -46,14 +45,14 @@ func RegisterUserInfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Bcrypt Password
-	password = methods.HashPassword(password)
+	password = HashPassword(password)
 
 	//Insert Values to Data
-	_, err = db.Exec(methods.INSERT, username, password, email)
+	_, err = db.Exec(INSERT, username, password, email)
 	if err != nil {
 		http.Error(w, "Error inserting data into the database", http.StatusInternalServerError)
 		return
 	}
 
-	methods.Tpl.ExecuteTemplate(w, "message.html", nil)
+	Tpl.ExecuteTemplate(w, "index.html", nil)
 }
