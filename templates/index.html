@@ -1,6 +1,3 @@
-<!-- color palette -->
-<!-- #164863 #1D6D8A #427D9D #9BBEC8 #DDF2FD  -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +12,43 @@
         box-sizing: border-box;
         padding: inherit;
       }
-      .login-box form a {
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(#141e30, #243b55);
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      header h1 {
+        color: #03e9f4;
+        font-size: 3em;
+        margin-bottom: 10px;
+      }
+
+      .buttons {
+        text-align: center;
+      }
+
+      .login-box form,
+      button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .login-box form a,
+      button {
         position: relative;
         display: inline-block;
         padding: 10px 20px;
@@ -26,11 +59,13 @@
         overflow: hidden;
         transition: 0.5s;
         margin-top: 40px;
-        margin-left: 8%;
-        margin-right: 8%;
+        margin-left: auto;
+        margin-right: auto;
         letter-spacing: 4px;
+        border: none;
       }
 
+      form button:hover,
       .login-box a:hover {
         background: #03e9f4;
         color: #fff;
@@ -44,130 +79,90 @@
         display: block;
       }
 
-      .login-box a span:nth-child(1) {
-        top: 0;
-        left: -100%;
+      .login-box a span:nth-child(1),
+      .login-box a span:nth-child(2),
+      .login-box a span:nth-child(3),
+      .login-box a span:nth-child(4) {
         width: 100%;
         height: 2px;
         background: linear-gradient(90deg, transparent, #03e9f4);
+      }
+
+      .login-box a span:nth-child(1) {
         animation: btn-anim1 1s linear infinite;
       }
 
-      @keyframes btn-anim1 {
-        0% {
-          left: -100%;
-        }
-        50%,
-        100% {
-          left: 100%;
-        }
-      }
-
       .login-box a span:nth-child(2) {
-        top: -100%;
-        right: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(180deg, transparent, #03e9f4);
         animation: btn-anim2 1s linear infinite;
         animation-delay: 0.25s;
       }
 
-      @keyframes btn-anim2 {
-        0% {
-          top: -100%;
-        }
-        50%,
-        100% {
-          top: 100%;
-        }
-      }
-
       .login-box a span:nth-child(3) {
-        bottom: 0;
-        right: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(270deg, transparent, #03e9f4);
         animation: btn-anim3 1s linear infinite;
         animation-delay: 0.5s;
       }
 
-      @keyframes btn-anim3 {
-        0% {
-          right: -100%;
-        }
-        50%,
-        100% {
-          right: 100%;
-        }
-      }
-
       .login-box a span:nth-child(4) {
-        bottom: -100%;
-        left: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(360deg, transparent, #03e9f4);
         animation: btn-anim4 1s linear infinite;
         animation-delay: 0.75s;
       }
 
-      @keyframes btn-anim4 {
+      @keyframes btn-anim1 {
         0% {
-          bottom: -100%;
+          transform: translate(0, 0);
         }
         50%,
         100% {
-          bottom: 100%;
+          transform: translate(100%, 0);
+        }
+      }
+      @keyframes btn-anim2 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
         }
       }
 
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background: linear-gradient(#141e30, #243b55);
-        font-family: Arial, sans-serif;
-        margin: 20px;
+      @keyframes btn-anim3 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
       }
-
-      header a {
-        /* border: 1px solid #243b55; */
-        border-radius: 5px;
-        text-align: center;
-        color: #ddf2fd;
-        font-family: sans-serif;
-        height: 1%;
-        padding: 0 auto;
-      }
-
-      header h1 {
-        color: #ddf2fd;
+      @keyframes btn-anim4 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
       }
 
       section {
         margin-top: 20px;
       }
-      /* Basic styling for the filters container */
+
       .filters {
-        display: flex;
+        display: inline-grid;
         flex-direction: row;
         align-items: center;
-        display: inline-block;
-        margin-left: 69%;
-        /* margin-right: 5%; */
+        margin-left: 71%;
         padding: 10px;
         border-radius: 8px;
         color: #03e9f4;
       }
 
-      /* Styling for the labels */
       label {
         margin-right: 8px;
       }
 
-      /* Styling for the select dropdowns */
       select {
         padding: 8px;
         border: 1px solid #ccc;
@@ -209,7 +204,6 @@
         border-radius: 5px;
         padding: 10px;
         margin-bottom: 10px;
-        /* background-color: #164863; */
         color: #9bbec8;
       }
 
@@ -220,13 +214,10 @@
         padding: 5px;
         border-radius: 5px;
         align-items: center;
-        /* move to the center */
         position: relative;
-
-        /* Center horizontally */
         margin-left: auto;
         margin-right: auto;
-        width: 80%; /* Adjust the width as needed */
+        width: 80%;
       }
 
       form label,
@@ -235,26 +226,69 @@
       form button {
         display: block;
         margin-bottom: 10px;
+        margin-left: 15px;
+      }
+
+      form input,
+      textarea {
+        padding: 10px 10px 10px 10px;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 80%;
+      }
+
+      .image {
+        border: none;
       }
 
       form button {
-        background-color: #243b55;
-        color: #9bbec8;
-        cursor: pointer;
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: 0.5s;
+        margin-top: 40px;
+        margin-left: 2%;
+        margin-right: auto;
+        letter-spacing: 4px;
+        background: transparent;
+        font-weight: bold;
+      }
+
+      form button a:hover {
+        background: #03e9f4;
+        color: #fff;
         border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+          0 0 100px #03e9f4;
       }
 
       footer {
         margin-top: 20px;
         color: #ddf2fd;
+        text-align: center;
+      }
+
+      footer img {
+        width: 50%;
+        height: 4%;
       }
     </style>
   </head>
 
   <body>
     <header>
-      <h1 style="text-align: center">FORUM</h1>
-      <div class="buttons" style="text-align: center">
+      <br />
+      <h1>FORUM</h1>
+      <br />
+      <div class="buttons">
         <div class="login-box register-box">
           <form action="">
             <a href="/login"> Login </a>
@@ -276,10 +310,9 @@
         </select>
       </div>
     </header>
-
     <section>
       <form>
-        <h2>Create a New Post</h2>
+        <h2>Create a Post</h2>
         <label for="postTitle">Title:</label>
         <input type="text" id="postTitle" name="postTitle" required />
 
@@ -292,6 +325,7 @@
           id="imageUpload"
           name="imageUpload"
           accept="image/*"
+          class="image"
         />
 
         <button type="submit">Post</button>
@@ -332,27 +366,6 @@
           </div>
         </div>
       </div>
-
-      <!-- More posts can be added for additional topics -->
-
-      <!-- <form>
-        <h2>Create a New Post</h2>
-        <label for="postTitle">Title:</label>
-        <input type="text" id="postTitle" name="postTitle" required />
-
-        <label for="postContent">Post:</label>
-        <textarea id="postContent" name="postContent" required></textarea>
-
-        <label for="imageUpload">Upload Image:</label>
-        <input
-          type="file"
-          id="imageUpload"
-          name="imageUpload"
-          accept="image/*"
-        />
-
-        <button type="submit">Post</button>
-      </form> -->
     </section>
     <footer>
       <br />
@@ -365,7 +378,7 @@
           />
         </span>
       </div>
-      <p style="text-align: center">Empowered by 01Founders</p>
+      <p>Empowered by 01Founders</p>
     </footer>
   </body>
 </html>
