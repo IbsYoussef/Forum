@@ -1,10 +1,10 @@
 :root {
-  --bg-color: white;
-  --second-bg-color: #90e0ef;
+  --bg-color: #00b4d8;
+  --second-bg-color: white;
   --3d-bg-color: #caf0f8;
-  --text-color: Black;
-  --second-color: #90e0ef;
-  --main-color: #90e0ef;
+  --text-color: aqua;
+  --second-color: aqua; /* Background colour of login box */ 
+  --main-color: aqua; /* Home Icon Colour */
   --big-font: 5rem;
   --h2-font: 3rem;
   --h3-font: 2rem;
@@ -31,7 +31,7 @@
 
 .front,
 .back {
-  background-color: white;
+  background-color: var(--3d-bg-color);
   position: absolute;
   padding: 10px 30px;
   top: 0;
@@ -101,8 +101,7 @@ input[type="submit"]:hover {
 
 #loginButton:hover,
 #registerButton:hover {
-  color: #90e0ef;
-
+  color: aqua; /* Create account button colour when hovered */
 }
 
 
@@ -111,7 +110,7 @@ input[type="submit"]:hover {
 }
 
 .flipbutton {
-  color: #03045e;
+  color: #03045e; /* Create account button colour */
   text-decoration: none;
   text-align: left !important;
 }
@@ -141,7 +140,7 @@ body {
   width: 300px;
   height: 300px;
   position: relative;
-  background: var(--3d-bg-color);
+  background: white;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -188,7 +187,7 @@ nav {
 }
 
 .navlist a:hover {
-  color:  #03045e;
+  color: blue;
 }
 
 .navlist a.active {
