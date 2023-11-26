@@ -1,396 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./static" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <title>Forum</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        padding: inherit;
-      }
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/mainpage.css">
+    <script src="/static/script.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Forum - Main Page</title>
+</head>
 
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        background: linear-gradient(#141e30, #243b55);
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
+<body>
+    <nav>
+        <img class="logo" src="/static/images/logo.png" alt="" width="400">
+        <section class="filter-options">
+            <form action="/filter" method="GET">
+                <label for="category"></label>
+                <select name="category" id="category">
+                    <option value="" selected disabled>Categories</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Nutrition">Nutrition</option>
+                    <option value="Recovery">Recovery</option>
+                    <option value="Tech">Tech</option>
+                    <!-- Add options for all available categories -->
+                </select>
+                <label for="created">Created by Me:</label>
+                <input type="checkbox" name="created" id="created" value="true">
+                <label for="liked">Liked by Me:</label>
+                <input type="checkbox" name="liked" id="liked" value="true">
+                <button type="submit">Apply Filter</button>
+            </form>
+        </section>
 
-      header {
-        text-align: center;
-        margin-bottom: 20px;
-      }
+        <ul class="navlist">
+            <li><a href="/" class="home-link"><i class='bx bx-home-circle'></i> Home</a></li>
 
-      header h1 {
-        color: #03e9f4;
-        font-size: 3em;
-        margin-bottom: 10px;
-      }
+            {{if .IsAuthenticated}}
+            <li><a href="/create-post" class="create-link"><i class='bx bxs-plus-square'></i> Create Post</a></li>
+            <li><a href="/logout" class="logout-link"><i class='bx bxs-exit'></i> Logout</a></li>
+            {{else}}
+            <li><a href="/login" class="login-link"><i class='bx bxs-door-open'></i></i> Login</a></li>
+            <li><a href="/register" class="register-link"><i class='bx bxs-spreadsheet'></i> Register</a></li>
+            {{end}}
+        </ul>
+    </nav>
 
-      .buttons {
-        text-align: center;
-      }
 
-      .login-box form,
-      button {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding-bottom: 30px;
-        margin-left: auto;
-        margin-right: auto;
-      }
+    <!-----------Welcome Message Design------------>
+    <section class="hero">
+        <h1>Welcome to the Forum {{.Username}} !</h1>
+    </section>
 
-      .login-box form a,
-      button {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        color: #03e9f4;
-        font-size: 16px;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: 0.5s;
-        margin-top: 40px;
-        margin-left: auto;
-        margin-right: auto;
-        letter-spacing: 4px;
-        border: none;
-      }
+    <!-- Display a list of forum posts here -->
+    <section class="post-container">
+        <h2>Latest Posts</h2>
+        {{range .Posts}}
+        <div class="cardbox-container" data-post-id="{{.ID}}">
+            <!-- Form for like and dislike -->
+            <!-- User posting -->
+            <div class="post-right-column">
+                <!-- ... (unchanged) ... -->
+                <div class="post-header">
+                    <h3>{{.Title}}</h3>
+                    <div class="like-dislike-buttons">
+                        <div class="button-container">
+                            <form method="POST" action="/like-post">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="like">
+                                <button type="submit" class="like-button"><i class='bx bxs-heart'></i></button>
+                            </form>
+                            <div class="post-rating-count">{{.LikeCount}}</div>
+                        </div>
 
-      form button:hover,
-      .login-box a:hover {
-        background: #03e9f4;
-        color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-          0 0 100px #03e9f4;
-      }
+                        <div class="button-container">
+                            <form method="POST" action="/dislike-post">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="dislike">
+                                <button type="submit" class="dislike-button"><i class='bx bx-heart'></i></button>
+                            </form>
+                            <div class="post-rating-count">{{.DislikeCount}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>{{.Content}}</p>
+                </div>
+                <div class="post-author">
+                    <div class="post-author-handle">&#160;&#160;Posted by <span>{{.Username}}</span> {{.CreationDate.Format "2006-01-02 15:04:05"}}
+                    </div>
+                </div>
 
-      .login-box a span {
-        position: absolute;
-        display: block;
-      }
-
-      .login-box a span:nth-child(1),
-      .login-box a span:nth-child(2),
-      .login-box a span:nth-child(3),
-      .login-box a span:nth-child(4) {
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #03e9f4);
-      }
-
-      .login-box a span:nth-child(1) {
-        animation: btn-anim1 1s linear infinite;
-      }
-
-      .login-box a span:nth-child(2) {
-        animation: btn-anim2 1s linear infinite;
-        animation-delay: 0.25s;
-      }
-
-      .login-box a span:nth-child(3) {
-        animation: btn-anim3 1s linear infinite;
-        animation-delay: 0.5s;
-      }
-
-      .login-box a span:nth-child(4) {
-        animation: btn-anim4 1s linear infinite;
-        animation-delay: 0.75s;
-      }
-
-      @keyframes btn-anim1 {
-        0% {
-          transform: translate(0, 0);
-        }
-        50%,
-        100% {
-          transform: translate(100%, 0);
-        }
-      }
-      @keyframes btn-anim2 {
-        0% {
-          transform: translate(0, 0);
-        }
-        50%,
-        100% {
-          transform: translate(100%, 0);
-        }
-      }
-
-      @keyframes btn-anim3 {
-        0% {
-          transform: translate(0, 0);
-        }
-        50%,
-        100% {
-          transform: translate(100%, 0);
-        }
-      }
-      @keyframes btn-anim4 {
-        0% {
-          transform: translate(0, 0);
-        }
-        50%,
-        100% {
-          transform: translate(100%, 0);
-        }
-      }
-
-      section {
-        margin-top: 20px;
-      }
-
-      .filters {
-        display: inline-grid;
-        flex-direction: row;
-        align-items: center;
-        margin-left: 71%;
-        padding: 10px;
-        border-radius: 8px;
-        color: #03e9f4;
-      }
-
-      label {
-        margin-right: 8px;
-      }
-
-      select {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-
-      .post {
-        border: 1px solid #243b55;
-        border-radius: 5px;
-        padding: 15px;
-        margin-bottom: 15px;
-        background-color: #427d9d;
-        color: #ddf2fd;
-        width: 80%;
-        margin: 0 auto;
-      }
-
-      .post h2 {
-        color: #ddf2fd;
-      }
-
-      .post p {
-        margin-bottom: 10px;
-      }
-
-      .post img {
-        max-width: 80%;
-        height: auto;
-        margin-bottom: 10px;
-      }
-
-      .comments {
-        margin-top: 10px;
-        margin-left: 20px;
-      }
-
-      .comment {
-        border: 1px solid #164863;
-        border-radius: 5px;
-        padding: 10px;
-        margin-bottom: 10px;
-        color: #9bbec8;
-      }
-
-      form {
-        font-weight: bolder;
-        margin-top: 20px;
-        background-color: #9bbec8;
-        padding: 5px;
-        border-radius: 5px;
-        align-items: center;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        width: 80%;
-      }
-
-      form label,
-      form textarea,
-      form input,
-      form button {
-        display: block;
-        margin-bottom: 10px;
-        margin-left: 15px;
-      }
-
-      form input,
-      textarea {
-        padding: 10px 10px 10px 10px;
-        box-sizing: border-box;
-        font-family: "Arial", sans-serif;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 80%;
-      }
-
-      .image {
-        border: none;
-      }
-
-      form button {
-        position: relative;
-        display: inline-block;
-        padding: 10px 20px;
-        color: #03e9f4;
-        font-size: 16px;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: 0.5s;
-        margin-top: 40px;
-        margin-left: 2%;
-        margin-right: auto;
-        letter-spacing: 4px;
-        background: transparent;
-        font-weight: bold;
-      }
-
-      form button a:hover {
-        background: #03e9f4;
-        color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-          0 0 100px #03e9f4;
-      }
-
-      footer {
-        margin-top: 20px;
-        color: #ddf2fd;
-        text-align: center;
-      }
-
-      footer img {
-        width: 50%;
-        height: 4%;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <br />
-      <h1>FORUM</h1>
-      <br />
-      <div class="buttons">
-        <div class="login-box register-box">
-          <form action="">
-            <a href="/login"> Login </a>
-            <a href="/register"> Register </a>
-          </form>
+                <div class="comments-counts">Comments:</div>
+                <!-- Display comments -->
+                {{range .Comments}}
+                <div class="comment-container">
+                    <ul>
+                        <!-- Display comments for this post -->
+                        <div class="speech-bubble">
+                            <p>{{.Content}}</p>
+                            <div class="post-author">
+                                <div class="post-author-handle">&#160;&#160;Comment by <span>{{.Username}}</span>
+                                    {{.CreationDate.Format "2006-01-02 15:04:05"}}</div>
+                            </div>
+                        </div>
+                        <!-- Form for like dislike comments for this post -->
+                        <div class="like-dislike-buttons">
+                            <form method="POST" action="/like-comment">
+                                <input type="hidden" name="comment_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="like">
+                                <button type="submit" class="clike-button"><i class='bx bxs-heart'></i>
+                                </button>
+                            </form>
+                            <div class="post-rating-count">{{.LikeCount}}</div>
+                            <form method="POST" action="/dislike-comment">
+                                <input type="hidden" name="comment_id" value="{{.ID}}">
+                                <input type="hidden" name="action" value="dislike">
+                                <button type="submit" class="cdislike-button"><i class='bx bx-heart'></i>
+                                </button>
+                            </form>
+                            <div class="post-rating-count">{{.DislikeCount}}</div>
+                        </div>
+                    </ul>
+                </div>
+                {{end}}
+                <!-- Here you can add comment -->
+                <div class="add-comment-form">
+                    <form method="POST" action="/add-comment">
+                        <input type="hidden" name="post_id" value="{{.ID}}">
+                        <input type="text" name="content" placeholder="Add your comment">
+                        <button type="submit"><i class='bx bxs-send'></i></button>
+                    </form>
+                </div>
+                <!-- End of submit comment form -->
+            </div>
         </div>
-      </div>
-      <div class="filters">
-        <label for="filter">Filter</label>
-        <select name="options" id="filter">
-          <option value="posted">Created Posts</option>
-          <option value="commented">Liked Posts</option>
-        </select>
-        <label for="Categories">Categories</label>
-        <select name="Categories" id="Categories">
-          <option value="food">Food</option>
-          <option value="sports">Sports</option>
-          <option value="tech">Tech</option>
-        </select>
-      </div>
-    </header>
-    <section>
-      <form>
-        <h2>Create a Post</h2>
-        <label for="postTitle">Title:</label>
-        <input type="text" id="postTitle" name="postTitle" required />
-
-        <label for="postContent">Post:</label>
-        <textarea id="postContent" name="postContent" required></textarea>
-
-        <label for="imageUpload">Upload Image:</label>
-        <input
-          type="file"
-          id="imageUpload"
-          name="imageUpload"
-          accept="image/*"
-          class="image"
-        />
-
-        <button type="submit">Post</button>
-      </form>
-      <br />
-      <div class="post">
-        <h2>Post Title 1</h2>
-        <p>Posted by: u/JohnDoe</p>
-        <img src="example-image.jpg" alt="Example Image" />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui
-          mauris.
-        </p>
-        <div class="comments">
-          <div class="comment">
-            <p>u/Alice: Comment 1</p>
-          </div>
-          <div class="comment">
-            <p>u/Bob: Comment 2</p>
-          </div>
-        </div>
-        <i class="fa solid fa-thumbs-up"></i>
-        <i class="fa regular fa-thumbs-up fa-rotate-180"></i>
-      </div>
-      <br />
-      <div class="post">
-        <h2>Post Title 2</h2>
-        <p>Posted by: u/JaneSmith</p>
-        <img src="another-image.jpg" alt="Another Image" />
-        <p>
-          Another interesting post. Duis aute irure dolor in reprehenderit in
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        </p>
-        <div class="comments">
-          <div class="comment">
-            <p>u/Charlie: Comment 1</p>
-          </div>
-          <div class="comment">
-            <p>u/David: Comment 2</p>
-          </div>
-        </div>
-        <i class="fas fa-thumbs-up"></i>
-        <i class="far fa-thumbs-down fa-rotate"></i>
-      </div>
+        <!-- End of cardbox-container -->
+        {{end}}
+        </ul>
     </section>
     <footer>
-      <br />
-      <div style="text-align: center">
-        <span style="display: inline-block">
-          <img
-            src="/static/01Flogo.png"
-            alt="01LogoImage"
-            style="width: 50%; height: 4%"
-          />
-        </span>
-      </div>
-      <p>Empowered by 01Founders</p>
+        <!-- ... (your existing footer content) ... -->
     </footer>
-    <script
-      src="https://kit.fontawesome.com/8816f52851.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+</body>
+
 </html>

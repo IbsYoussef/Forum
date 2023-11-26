@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./static" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Forum</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        padding: inherit;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(#141e30, #243b55);
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      header h1 {
+        color: #03e9f4;
+        font-size: 3em;
+        margin-bottom: 10px;
+      }
+
+      .buttons {
+        text-align: center;
+      }
+
+      .login-box form,
+      button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .login-box form a,
+      button {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: 0.5s;
+        margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        letter-spacing: 4px;
+        border: none;
+      }
+
+      form button:hover,
+      .login-box a:hover {
+        background: #03e9f4;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+          0 0 100px #03e9f4;
+      }
+
+      .login-box a span {
+        position: absolute;
+        display: block;
+      }
+
+      .login-box a span:nth-child(1),
+      .login-box a span:nth-child(2),
+      .login-box a span:nth-child(3),
+      .login-box a span:nth-child(4) {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #03e9f4);
+      }
+
+      .login-box a span:nth-child(1) {
+        animation: btn-anim1 1s linear infinite;
+      }
+
+      .login-box a span:nth-child(2) {
+        animation: btn-anim2 1s linear infinite;
+        animation-delay: 0.25s;
+      }
+
+      .login-box a span:nth-child(3) {
+        animation: btn-anim3 1s linear infinite;
+        animation-delay: 0.5s;
+      }
+
+      .login-box a span:nth-child(4) {
+        animation: btn-anim4 1s linear infinite;
+        animation-delay: 0.75s;
+      }
+
+      @keyframes btn-anim1 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
+      }
+      @keyframes btn-anim2 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
+      }
+
+      @keyframes btn-anim3 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
+      }
+      @keyframes btn-anim4 {
+        0% {
+          transform: translate(0, 0);
+        }
+        50%,
+        100% {
+          transform: translate(100%, 0);
+        }
+      }
+
+      section {
+        margin-top: 20px;
+      }
+
+      .filters {
+        display: inline-grid;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 71%;
+        padding: 10px;
+        border-radius: 8px;
+        color: #03e9f4;
+      }
+
+      label {
+        margin-right: 8px;
+      }
+
+      select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .post {
+        border: 1px solid #243b55;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #427d9d;
+        color: #ddf2fd;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .post h2 {
+        color: #ddf2fd;
+      }
+
+      .post p {
+        margin-bottom: 10px;
+      }
+
+      .post img {
+        max-width: 80%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .comments {
+        margin-top: 10px;
+        margin-left: 20px;
+      }
+
+      .comment {
+        border: 1px solid #164863;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        color: #9bbec8;
+      }
+
+      form {
+        font-weight: bolder;
+        margin-top: 20px;
+        background-color: #9bbec8;
+        padding: 5px;
+        border-radius: 5px;
+        align-items: center;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+      }
+
+      form label,
+      form textarea,
+      form input,
+      form button {
+        display: block;
+        margin-bottom: 10px;
+        margin-left: 15px;
+      }
+
+      form input,
+      textarea {
+        padding: 10px 10px 10px 10px;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 80%;
+      }
+
+      .image {
+        border: none;
+      }
+
+      form button {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #03e9f4;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: 0.5s;
+        margin-top: 40px;
+        margin-left: 2%;
+        margin-right: auto;
+        letter-spacing: 4px;
+        background: transparent;
+        font-weight: bold;
+      }
+
+      form button a:hover {
+        background: #03e9f4;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+          0 0 100px #03e9f4;
+      }
+
+      footer {
+        margin-top: 20px;
+        color: #ddf2fd;
+        text-align: center;
+      }
+
+      footer img {
+        width: 50%;
+        height: 4%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <br />
+      <h1>FORUM</h1>
+      <br />
+      <div class="buttons">
+        <div class="login-box register-box">
+          <form action="">
+            <a href="/login"> Login </a>
+            <a href="/register"> Register </a>
+          </form>
+        </div>
+      </div>
+      <div class="filters">
+        <label for="filter">Filter</label>
+        <select name="options" id="filter">
+          <option value="posted">Created Posts</option>
+          <option value="commented">Liked Posts</option>
+        </select>
+        <label for="Categories">Categories</label>
+        <select name="Categories" id="Categories">
+          <option value="food">Food</option>
+          <option value="sports">Sports</option>
+          <option value="tech">Tech</option>
+        </select>
+      </div>
+    </header>
+    <section>
+      <form>
+        <h2>Create a Post</h2>
+        <label for="postTitle">Title:</label>
+        <input type="text" id="postTitle" name="postTitle" required />
+
+        <label for="postContent">Post:</label>
+        <textarea id="postContent" name="postContent" required></textarea>
+
+        <label for="imageUpload">Upload Image:</label>
+        <input
+          type="file"
+          id="imageUpload"
+          name="imageUpload"
+          accept="image/*"
+          class="image"
+        />
+
+        <button type="submit">Post</button>
+      </form>
+      <br />
+      <div class="post">
+        <h2>Post Title 1</h2>
+        <p>Posted by: u/JohnDoe</p>
+        <img src="example-image.jpg" alt="Example Image" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui
+          mauris.
+        </p>
+        <div class="comments">
+          <div class="comment">
+            <p>u/Alice: Comment 1</p>
+          </div>
+          <div class="comment">
+            <p>u/Bob: Comment 2</p>
+          </div>
+        </div>
+        <i class="fa solid fa-thumbs-up"></i>
+        <i class="fa regular fa-thumbs-up fa-rotate-180"></i>
+      </div>
+      <br />
+      <div class="post">
+        <h2>Post Title 2</h2>
+        <p>Posted by: u/JaneSmith</p>
+        <img src="another-image.jpg" alt="Another Image" />
+        <p>
+          Another interesting post. Duis aute irure dolor in reprehenderit in
+          voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </p>
+        <div class="comments">
+          <div class="comment">
+            <p>u/Charlie: Comment 1</p>
+          </div>
+          <div class="comment">
+            <p>u/David: Comment 2</p>
+          </div>
+        </div>
+        <i class="fas fa-thumbs-up"></i>
+        <i class="far fa-thumbs-down fa-rotate"></i>
+      </div>
+    </section>
+    <footer>
+      <br />
+      <div style="text-align: center">
+        <span style="display: inline-block">
+          <img
+            src="/static/01Flogo.png"
+            alt="01LogoImage"
+            style="width: 50%; height: 4%"
+          />
+        </span>
+      </div>
+      <p>Empowered by 01Founders</p>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/8816f52851.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

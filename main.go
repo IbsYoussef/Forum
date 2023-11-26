@@ -2,32 +2,71 @@ package main
 
 import (
 	"fmt"
-	methods "forum/packages/methods"
+	"forum/packages/database"
+	"forum/packages/handlers"
+
 	"log"
 	"net/http"
-
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	methods.InitGlobalTemplate()
+	// Define the path to your SQLite database file
+	dbPath := "database/database.db"
 
-	//Index Page
-	http.HandleFunc("/", methods.IndexHandler)
-
-	//Login and Register Page
-	http.HandleFunc("/login", methods.LoginPageRegHandler)
-	http.HandleFunc("/register", methods.RegisterPageHandler)
-
-	//Forum Page Handler
-	http.HandleFunc("/mainpage", methods.ForumPageHandler)
-
-	methods.ServeStatic()
-
-	fmt.Printf("Listening... on port 👉 http://localhost:8080/ \n")
-	fmt.Printf("Use 👉 Control+C to stop server \n")
-
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Printf("Error code: %s", err.Error())
+	// Open a connection to the database
+	db, err := database.OpenDatabase(dbPath)
+	if err != nil {
+		log.Fatal(err)
 	}
+	defer db.Close()
+
+	// Initialize the schema and create tables
+	err = database.InitializeSchema(db)
+	if err != nil {
+		log.Fatal(err)
+	}
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		handlers.ShowPostHandler(w, r, db)
+	})
+
+	http.HandleFunc("/register", handlers.RegisterPageHandler)
+	http.HandleFunc("/registerauth", func(w http.ResponseWriter, r *http.Request) {
+		handlers.RegisterSubmitHandler(w, r, db)
+	})
+	http.HandleFunc("/login", handlers.LoginHandler)
+	http.HandleFunc("/loginauth", func(w http.ResponseWriter, r *http.Request) {
+		handlers.LoginSubmitHandler(w, r, db)
+	})
+	http.HandleFunc("/logout", handlers.LogoutHandler)
+	http.HandleFunc("/create-post", handlers.AddPost)
+	http.HandleFunc("/add-post", func(w http.ResponseWriter, r *http.Request) {
+		handlers.AddPostSubmit(w, r, db)
+	})
+	http.HandleFunc("/add-comment", func(w http.ResponseWriter, r *http.Request) {
+		handlers.AddCommentHandler(w, r, db)
+	})
+	http.HandleFunc("/like-post", func(w http.ResponseWriter, r *http.Request) {
+		handlers.LikePostHandler(w, r, db)
+	})
+	http.HandleFunc("/dislike-post", func(w http.ResponseWriter, r *http.Request) {
+		handlers.DislikePostHandler(w, r, db)
+	})
+	http.HandleFunc("/like-comment", func(w http.ResponseWriter, r *http.Request) {
+		handlers.LikeCommentHandler(w, r, db)
+	})
+	http.HandleFunc("/dislike-comment", func(w http.ResponseWriter, r *http.Request) {
+		handlers.DisikeCommentHandler(w, r, db)
+	})
+	http.HandleFunc("/filter", func(w http.ResponseWriter, r *http.Request) {
+		handlers.FilterPosts(w, r, db)
+	})
+
+	fmt.Println("Server Running 🏁")
+	fmt.Println("Listening on Port http://localhost:8080/")
+	fmt.Println("Use 👉 Control + C to ❌ server")
+	http.ListenAndServe(":8080", nil)
+
+	// You can now use the 'db' connection to perform database operations.
+
 }
